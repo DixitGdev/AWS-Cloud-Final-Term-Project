@@ -32,7 +32,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:8080/api/v1/dalle', {
+        const response = await fetch('http://pixelpen.us-east-1.elasticbeanstalk.com/api/v1/dalle', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const CreatePost = () => {
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:8080/api/v1/post', {
+        const response = await fetch('http://pixelpen.us-east-1.elasticbeanstalk.com/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,6 @@ const CreatePost = () => {
 
         await response.json();
         alert('Your photo is shared successfully with the community.');
-        navigate('/');
       } catch (err) {
         alert(err);
       } finally {
