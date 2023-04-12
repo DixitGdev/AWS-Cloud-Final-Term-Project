@@ -4,19 +4,20 @@ import cors from 'cors';
 import serverless from 'serverless-http'
 
 import postRoutes from './routes/postRoutes.js';
+import downloadRoutes from './routes/downloadRoutes.js'
 import dalleRoutes from './routes/dalleRoutes.js';
 
 dotenv.config();
 const app = express();
 
-
 app.use(cors({
-  origin: ["http://pixelpen-frontend.s3-website-us-east-1.amazonaws.com", "http://d269jse5o9ufap.cloudfront.net"]
+  origin: "*"
 }));
 
 app.use(express.json({ limit: '60mb' }));
 app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
+app.use('/api/v1/download', downloadRoutes)
 
 
 const PORT = process.env.PORT || 8080;
@@ -28,10 +29,10 @@ app.all('*', function(req, res, next) {
   next();
 });
 
-// TODO : NEED TO CHANGE THIS ROUTE
+// HOME ROUTE GET REQUEST
 app.get('/', async (req, res) => {  
   res.status(200).json({
-    message: 'Hello from PixelPen',
+    message: 'Hello from PixelPen - Backend Server is running fine 🟢',
   });
 });
 

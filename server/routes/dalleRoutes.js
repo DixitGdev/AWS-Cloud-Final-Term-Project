@@ -24,7 +24,7 @@ const retrieveSecret = (KeyValue,SecretName) => {
   })
 }
 
-// AWS SECRET MANAGER //
+// -- AWS SECRET MANAGER -- //
 let apiKey = await retrieveSecret('OPEN_AI_API_KEY', 'OpenAIKey')
 
 const configuration = new Configuration({

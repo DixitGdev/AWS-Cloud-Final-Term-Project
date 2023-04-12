@@ -31,7 +31,7 @@ async function uploadImageToS3(base64Image, userName, prompt){
   return uploadResult.Location;
 }
 
-// TODO: GET ALL POST FROM S3 AND SEND RESPONSE BACK TO THE HOME PAGE
+// GET ALL POST FROM S3 AND SEND RESPONSE BACK TO THE HOME PAGE
 router.route('/').get(async (req, res) => {
   try {
     const params = {
@@ -43,10 +43,11 @@ router.route('/').get(async (req, res) => {
       } else {
         const images = data.Contents.filter((item) => /\.(jpg|jpeg|png|gif)$/.test(item.Key)).map((image) => {
           return {
-            url: `https://${"dixit-image-store"}.s3.${process.env.AWS_REGION}.amazonaws.com/${image.Key}`,
+            url: `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${image.Key}`,
             key: image.Key,
             };
           });
+          
           res.header('Access-Control-Allow-Origin', '*');
       res.status(200).json({ success: true, data: images });
     }
@@ -56,8 +57,6 @@ router.route('/').get(async (req, res) => {
   }
 });
 
-
-// TODO: UPLOAD GENERATED IMAGE TO S3 AND RETURN URL OF IMAGE, SO WE CAN STORE IT
 router.route('/').post(async (req, res) => {
   try {
     const { name, prompt, photo } = req.body;

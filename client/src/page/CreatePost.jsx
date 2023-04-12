@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from '../components';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -32,7 +34,10 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://pixelpen.us-east-1.elasticbeanstalk.com/api/v1/dalle', {
+
+        // TODO: NEED TO CHANGE URL HERE - BACKEND to DALLE ENDPOINT
+
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/dalle`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -60,7 +65,10 @@ const CreatePost = () => {
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        const response = await fetch('http://pixelpen.us-east-1.elasticbeanstalk.com/api/v1/post', {
+
+        // TODO: CHANGE URL HERE TO MAKE POST REQUEST TO GET ALL THE POST ENDPOINT
+        
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/post`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

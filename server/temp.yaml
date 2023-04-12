@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Metadata:
+    Generator: "former2"
+Description: ""
+Resources:
+    ElasticBeanstalkApplication:
+        Type: "AWS::ElasticBeanstalk::Application"
+        Properties:
+            ApplicationName: "pixelpen-server-test"
+
+    AppVersion:
+        Type: "AWS::ElasticBeanstalk::ApplicationVersion"
+        Properties:
+            ApplicationName: !Ref ElasticBeanstalkApplication
+            Description: "v1-13"
+            SourceBundle:
+                S3Bucket: "elasticbeanstalk-us-east-1-770852352841"
+                S3Key: "1681257869124-server.zip"
+        DependsOn: ElasticBeanstalkApplication
+
+    EBInstanceProfile:
+        Type: "AWS::IAM::InstanceProfile"
+        Properties:
+            Path: "/"
+            Roles: [!Ref EBInstanceRole]
+
+    EBInstanceRole:
+        Type: "AWS::IAM::Role"
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    - Effect: "Allow"
+                      Principal:
+                          Service: "ec2.amazonaws.com"
+                      Action: "sts:AssumeRole"
+            Path: "/"
+
+    ElasticBeanstalkEnvironment:
+        Type: "AWS::ElasticBeanstalk::Environment"
+        Properties:
+            EnvironmentName: "pixelpen-server-test-env"
+            ApplicationName: "pixelpen-server-test"
+            VersionLabel: !Ref AppVersion
+            PlatformArn: !Sub "arn:aws:elasticbeanstalk:${AWS::Region}::platform/Node.js 18 running on 64bit Amazon Linux 2/5.8.0"
+            Tier: 
+                Name: "WebServer"
+                Type: "Standard"
+                Version: "1.0"
+            CNAMEPrefix: "pixelpen-test1"
+            InstanceProfile: !Ref EBInstanceProfile
+            Tags: 
+              - 
+                Key: "elasticbeanstalk:environment-name"
+                Value: "pixelpen-server-test-env"
+              - 
+                Key: "Name"
+                Value: "pixelpen-server-test-env"
+        DependsOn:
+            - ElasticBeanstalkApplication
+            - AppVersion
