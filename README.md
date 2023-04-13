@@ -1,5 +1,5 @@
 # CSCI5409 : AWS Cloud Project
-## Author : Dixit Ghodadara - [(Demo on YouTube)](https://www.youtube.com/watch?v=j35rCpvFF2c&ab_channel=DixitGhodadara)
+## Author : Dixit Ghodadara - [(Demo on YouTube)](https://www.youtube.com/watch?v=HIKTQwbzK1s&ab_channel=DixitGhodadara)
 
 ### About : PixelPen is an AI Image generation website that uses OpenAI's DALLE-2 Model to generate images from the text.
 
