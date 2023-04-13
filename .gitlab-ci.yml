@@ -1,0 +1,18 @@
+# CICD - GITHUB
+# build-client:
+#   image: node:latest
+#   variables:
+#     REACT_APP_BACKEND_URL: http://pixelpen.us-east-1.elasticbeanstalk.com
+#   script:
+#     - cd client
+#     - npm install
+#     - REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL npm run build
+#     - apt-get update && apt-get install -y awscli 
+#     - aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID" 
+#     - aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+#     - aws configure set aws_session_token "$AWS_SESSION_TOKEN"
+#     - aws configure set default.region "$AWS_DEFAULT_REGION" 
+#     - aws s3 sync dist/ s3://pixelpen-frontend/
+#   artifacts:
+#     paths:
+#       - client/dist/
