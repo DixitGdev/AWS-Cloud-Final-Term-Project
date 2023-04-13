@@ -1,8 +1,8 @@
-# CICD - GITHUB
+# CICD - GITLAB PIPELINE
 # build-client:
 #   image: node:latest
 #   variables:
-#     REACT_APP_BACKEND_URL: http://pixelpen.us-east-1.elasticbeanstalk.com
+#     REACT_APP_BACKEND_URL: "BACKEND_URL"
 #   script:
 #     - cd client
 #     - npm install
@@ -12,7 +12,7 @@
 #     - aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
 #     - aws configure set aws_session_token "$AWS_SESSION_TOKEN"
 #     - aws configure set default.region "$AWS_DEFAULT_REGION" 
-#     - aws s3 sync dist/ s3://pixelpen-frontend/
+#     - aws s3 sync dist/ s3://BUCKET_NAME/
 #   artifacts:
 #     paths:
 #       - client/dist/
