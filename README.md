@@ -14,6 +14,7 @@
 | [AWS CloudFront](https://aws.amazon.com/cloudfront/)    | [OpenAI API](https://openai.com/blog/openai-api)
 | [AWS SQS](https://aws.amazon.com/sqs/)     | [Nodemailer](https://nodemailer.com/about/)   
 | [AWS Secret Manager](https://aws.amazon.com/secrets-manager/)    | [DALLE-2](https://openai.com/blog/dall-e-api-now-available-in-public-beta)
+| [AWS Backup](https://aws.amazon.com/backup/)    | .
 
 ### Application Architecture
 
